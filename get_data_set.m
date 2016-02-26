@@ -3,7 +3,7 @@ close all
 
 filename1 = '20160225171559_seqA';
 filename2 = '20160225171559_seqB';
-filename3 = '20160225171559_seqc';
+filename3 = '20160225171559_seqC';
 
 d1 = csvread(['csvdata/' filename1 '.csv']);
 d2 = csvread(['csvdata/' filename2 '.csv']);
@@ -11,9 +11,6 @@ d3 = csvread(['csvdata/' filename3 '.csv']);
 
 D = d1;
 
-%labels{68}='state->x';
-%labels{69}='state->y';
-%labels{70}='state->yaw';
 %labels{71}='state->xD';
 %labels{72}='state->yD';
 %labels{73}='state->yawD'
@@ -21,7 +18,7 @@ D = d1;
 i_robot_pos_deriv = [71,72,73];
 robot_pos_deriv = D(:,i_robot_pos_deriv);
 [n,m] = size(robot_pos_deriv);
-robot_deriv = zeros((n-1),2*m);
+robot_deriv = zeros(1:(n-1),2*m);
 robot_deriv(:,1:m) = robot_pos_deriv(1:(n-1),:);
 robot_deriv(:,(m+1):end) = robot_pos_deriv(2:n,:);
 
