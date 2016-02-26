@@ -15,7 +15,7 @@ addpath(genpath('/home/alcor/machine_learning/gaussian_processes'));
 
 %% 1. Generating samples
 p = 0.8;
-[ xtrain, ytrain,x,Y, M, D, nx, ind_kf_train, ind_kx_train ] = split_data_set(state,cmd_vel,p);
+[ xtrain, ytrain,x,Y, M, D, nx, ind_kf_train, ind_kx_train ] = split_data_set(input_g,output_g,p);
 
 %% 2. Assigns cell data for learning and prediction
 covfunc_x = {'covSEard'};

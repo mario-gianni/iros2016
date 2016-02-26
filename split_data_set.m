@@ -1,7 +1,7 @@
-function [ xtrain, ytrain,x,Y, M, D, nx, ind_kf_train, ind_kx_train ] = split_data_set(state,cmd_vel,p)
+function [ xtrain, ytrain,x,Y, M, D, nx, ind_kf_train, ind_kx_train ] = split_data_set(input_,output_,p)
 disp('Data orgaization for learning');
-x = state;
-y = cmd_vel;
+x = input_;
+y = output_;
 % for i = 1 : n_samples
 %     noisy_xnext = state{2,i};
 %     cmd = cmd_vel{i};

@@ -52,14 +52,19 @@ robot_pos_o_deriv(:,3) =  robot_pos_deriv(:,3);
 robot_deriv_w_b_k = robot_pos_o_deriv(1:(n-1),:);
 robot_deriv_w_b_kp1 = robot_pos_o_deriv(2:n,:);
 
-state = [robot_deriv_w_b_k,robot_deriv_w_b_kp1,robot_pos_o(1:(end-1),3)]; % [qD_k+1, qD_k, q_k]
-
 %labels{11}='tracks_cmd->left';
 %labels{12}='tracks_cmd->right';
 i_vel = [11,12];
-cmd_vel = D(1:(end-1),i_vel);
 
-save(['dataset_g/' filename1 '.mat'],'state','cmd_vel')
+% data set for estimating g function
+input_g = [robot_deriv_w_b_k,robot_deriv_w_b_kp1,robot_pos_o(1:(end-1),3)]; % [qD_k+1, qD_k, q_k]
+output_g = D(1:(end-1),i_vel); % [vl_vr_k]
+
+% data set for estimating f function
+input_f = [robot_deriv_w_b_k,robot_pos_o(1:(end-1),3),output_g]; % [qD_k, q_k, vl_vr_k]
+output_f = robot_deriv_w_b_kp1; % [qD_k+1]
+
+save(['dataset_g/' filename1 '.mat'],'input_f','output_f','input_g','output_g')
 
 %% debug 
 %debug_get_data_set
