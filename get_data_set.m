@@ -18,7 +18,7 @@ D = d1;
 i_robot_pos_deriv = [71,72,73];
 robot_pos_deriv = D(:,i_robot_pos_deriv);
 [n,m] = size(robot_pos_deriv);
-robot_deriv = zeros(1:(n-1),2*m);
+robot_deriv = zeros((n-1),2*m);
 robot_deriv(:,1:m) = robot_pos_deriv(1:(n-1),:);
 robot_deriv(:,(m+1):end) = robot_pos_deriv(2:n,:);
 
