@@ -9,6 +9,8 @@ load(['dataset_g/' filename1 '.mat']);
 
 addpath(genpath('/home/alcor/machine_learning/multi_task_learning_gp'));
 addpath(genpath('/home/alcor/machine_learning/gaussian_processes'));
+%addpath(genpath('/home/alcor/gpml-v3.6'));
+
 
 
 %% 1. Generating samples
@@ -24,16 +26,19 @@ data  = {covfunc_x, xtrain, ytrain, M, irank, nx, ind_kf_train, ind_kx_train};
 %% 3. Hyper-parameter learning
 [logtheta_all,deriv_range] = init_mtgp_default(xtrain, covfunc_x, M, irank);
 disp('Learning');
+tic
 [logtheta_all,nl] = learn_mtgp(logtheta_all, deriv_range, data);
 
-plot(nl,'linewidt',3); 
+figure
+plot(nl,'linewidth',3); 
 title('Negative Marginal log-likelihood');
+grid on
 
 %% 4. Making predictions at all points on all tasks
 disp('Prediction');
 [ Ypred, Vpred ] = predict_mtgp_all_tasks(logtheta_all, data, x );
 disp('Finished');
-
+toc
 %% 5. Component-wise Euclidean Distance evaluation
 [n,m] = size(Y);
 error = zeros(n,1);
@@ -42,7 +47,8 @@ for i = 1 : M
     error = error + error_c; 
 end
 error_final = sqrt(error);
-plot(error_final,'linewidt',3); 
+figure
+plot(error_final,'linewidth',3); 
 title('Component-wise Euclidean Distance');
 
 mse = norm((Y - Ypred).^2);
