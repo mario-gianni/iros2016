@@ -7,8 +7,8 @@ filename3 = '20160225171559_seqc';
 
 load(['dataset_g/' filename1 '.mat']);
 
-addpath(genpath('/Users/Mario/github/machine_learning/multi_task_learning_gp'));
-addpath(genpath('/Users/Mario/github/machine_learning/gaussian_processes'));
+addpath(genpath('/home/alcor/machine_learning/multi_task_learning_gp'));
+addpath(genpath('/home/alcor/machine_learning/gaussian_processes'));
 
 
 %% 1. Generating samples
